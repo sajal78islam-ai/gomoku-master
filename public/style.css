@@ -1,0 +1,302 @@
+/* 1. Global Variables & Reset */
+:root {
+    --primary-gold: #ffcc33;
+    --secondary-gold: #dcb35c;
+    --bg-dark: #1a1a2e;
+    --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    --glass: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --shadow: 0 15px 35px rgba(0,0,0,0.6);
+    --stone-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+/* Light Theme Colors */
+.light-theme {
+    --bg-dark: #f0f0f0;
+    --glass: rgba(0, 0, 0, 0.05);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    color: #1a1a2e;
+}
+
+.light-theme h1 {
+    background: linear-gradient(to bottom, #1a1a2e, #444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.light-theme .opt-row {
+    background: rgba(0,0,0,0.05);
+    color: #1a1a2e;
+}
+
+.light-theme .sub-btn {
+    color: #1a1a2e;
+    border-color: rgba(0,0,0,0.2);
+}
+
+/* Ensure modal is centered */
+#stats-overlay {
+    z-index: 2000;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Removes blue highlight on mobile tap */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', 'Segoe UI', sans-serif;
+    background: var(--bg-gradient);
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Prevents scrolling like a real app */
+    user-select: none; /* Prevents text selection during fast gameplay */
+}
+
+/* 2. Navigation & Screen Management */
+.screen {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; 
+    transition: opacity 0.35s ease-in-out;
+    z-index: 10;
+}
+
+.hidden { 
+    display: none !important; 
+}
+
+/* 3. Splash Screen */
+#splash-screen {
+    background: #000;
+    opacity: 1; /* Starts visible */
+    z-index: 100;
+}
+
+.logo-text {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 8px;
+    background: linear-gradient(to bottom, #fff, var(--primary-gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: logoPulse 2s infinite ease-in-out;
+}
+
+@keyframes logoPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+/* 4. Main Menu UI */
+.menu-card {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 3rem 2rem;
+    border-radius: 40px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--primary-gold);
+}
+
+.main-btn {
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    background: linear-gradient(to right, var(--primary-gold), #ffa500);
+    border: none;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
+    transition: transform 0.1s, filter 0.2s;
+}
+
+.main-btn:active { transform: scale(0.95); filter: brightness(0.9); }
+
+.menu-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 2rem;
+}
+
+.opt-row {
+    background: rgba(255,255,255,0.03);
+    padding: 12px 20px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--glass-border);
+}
+
+.opt-row span { font-size: 0.9rem; font-weight: 600; opacity: 0.8; }
+
+select {
+    background: #1a1a2e;
+    color: var(--primary-gold);
+    border: 1px solid var(--primary-gold);
+    padding: 5px 10px;
+    border-radius: 8px;
+    outline: none;
+    font-weight: bold;
+}
+
+.footer-btns { display: flex; justify-content: space-between; gap: 10px; }
+
+.sub-btn {
+    flex: 1;
+    background: transparent;
+    color: white;
+    border: 1px solid var(--glass-border);
+    padding: 12px;
+    border-radius: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* 5. Game Arena (Play Screen) */
+.game-header {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Centers the Home and Reset buttons */
+    gap: 30px; /* Wider gap now that one button is gone */
+    position: absolute;
+    top: 0;
+}
+
+.game-header button {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.arena-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 60px;
+}
+
+.player-panel {
+    width: 160px;
+    padding: 20px;
+    background: var(--glass);
+    border-radius: 25px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.player-panel.active {
+    border-color: var(--primary-gold);
+    background: rgba(255, 204, 51, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 204, 51, 0.2);
+}
+
+.turn-indicator {
+    font-size: 0.7rem;
+    font-weight: 900;
+    margin-top: 10px;
+    letter-spacing: 1px;
+    color: var(--primary-gold);
+}
+
+/* 6. The Gomoku Board */
+#board {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    width: 500px;
+    height: 500px;
+    background: #dcb35c;
+    border: 8px solid #3e2723;
+    box-shadow: var(--shadow);
+    cursor: crosshair;
+}
+
+.cell {
+    border: 0.5px solid rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stone {
+    width: 85%;
+    height: 85%;
+    border-radius: 50%;
+    box-shadow: var(--stone-shadow);
+    animation: dropIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes dropIn { from { transform: scale(0); } to { transform: scale(1); } }
+
+.black-stone { background: radial-gradient(circle at 30% 30%, #444, #000); }
+.white-stone { background: radial-gradient(circle at 30% 30%, #fff, #ccc); }
+
+/* 7. Victory Overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.victory-card {
+    background: var(--bg-dark);
+    padding: 3rem;
+    border-radius: 40px;
+    border: 3px solid var(--primary-gold);
+    text-align: center;
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.score-box { margin: 20px 0; opacity: 0.9; }
+
+.victory-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Responsive Fixes for Small Phones */
+@media (max-width: 800px) {
+    .arena-container { flex-direction: column; gap: 20px; }
+    #board { width: 340px; height: 340px; }
+    .player-panel { width: 140px; padding: 10px; }
+}

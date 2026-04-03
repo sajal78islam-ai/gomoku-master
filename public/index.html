@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gomoku Pro - Ultimate Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body class="dark-theme">
+
+    <div id="splash-screen" class="screen">
+        <h1 class="logo-text">GOMOKU<span>PRO</span></h1>
+    </div>
+
+    <div id="main-menu" class="screen hidden">
+    <div class="menu-card">
+        <h1>GOMOKU PRO</h1>
+        
+        <button id="play-btn" class="main-btn">PLAY NOW</button>
+        
+        <div class="menu-options">
+            <div class="opt-row">
+                <span>PLAYER MODE</span>
+                <select id="game-mode">
+                    <option value="pvp">FRIENDS</option>
+                    <option value="ai">VS CPU</option>
+                </select>
+            </div>
+            <div class="opt-row">
+                <span>DIFFICULTY</span>
+                <select id="ai-difficulty">
+                    <option value="easy">EASY</option>
+                    <option value="medium">PRO</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="footer-btns">
+            <button id="stats-btn" class="sub-btn">🏆 STATS</button>
+            <button id="theme-btn" class="sub-btn">🌓 THEME</button>
+        </div>
+    </div>
+</div>
+
+    <div id="game-screen" class="screen hidden">
+        <div class="game-header">
+           
+            <button id="ingame-home-btn">🏠 MENU</button>
+            <button id="ingame-restart-btn">🔄 RESET</button>
+        </div>
+
+        <div class="arena-container">
+            <div class="player-panel left" id="p1-panel">
+                <div class="token black-stone"></div>
+                <h3>PLAYER 1</h3>
+                <div class="turn-indicator">YOUR TURN</div>
+            </div>
+
+            <div id="board-container">
+                <div id="board"></div>
+            </div>
+
+            <div class="player-panel right" id="p2-panel">
+                <div class="token white-stone"></div>
+                <h3 id="p2-name">PLAYER 2</h3>
+                <div class="turn-indicator">WAITING...</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="victory-overlay" class="overlay hidden">
+        <div class="victory-card">
+            <h1 id="win-title">VICTORY!</h1>
+            <div class="score-box">
+                <p>Winner: <span id="winner-score">Player 1</span></p>
+                <p>Loser: <span id="loser-score">Computer</span></p>
+            </div>
+            <div class="victory-buttons">
+                <button id="vic-play-again">PLAY AGAIN</button>
+                <button id="vic-home">🏠 HOME</button>
+            </div>
+        </div>
+    </div>
+<div id="stats-overlay" class="overlay hidden">
+    <div class="victory-card">
+        <h1>🏆 STATISTICS</h1>
+        <div class="score-box">
+            <div class="opt-row">
+                <span>PLAYER 1 (BLACK)</span>
+                <span id="stat-p1" style="color: var(--primary-gold); font-weight: bold;">0</span>
+            </div>
+            <div style="margin: 10px 0;"></div>
+            <div class="opt-row">
+                <span>CPU / P2 (WHITE)</span>
+                <span id="stat-p2" style="color: var(--primary-gold); font-weight: bold;">0</span>
+            </div>
+        </div>
+        <button id="close-stats" class="main-btn" style="margin-top: 20px;">CLOSE</button>
+    </div>
+</div>
+
+    <script src="Scripts.js"></script>
+</body>
+</html>
