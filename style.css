@@ -83,6 +83,16 @@ body {
 }
 
 .logo-text {
+    /* Update your logo class/ID with these properties */
+ 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* This is the magic part */
+    max-width: 90%;   /* Ensures it never touches the screen edges */
+    width: 400px;     /* Its normal size on a computer */
+    height: auto;     /* Keeps the logo from looking "squashed" */
     font-size: 3.5rem;
     font-weight: 900;
     letter-spacing: 8px;
