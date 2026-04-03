@@ -83,26 +83,27 @@ body {
 }
 
 .logo-text {
-    /* Update your logo class/ID with these properties */
- 
     display: block;
     margin-left: auto;
     margin-right: auto;
+    text-align: center; /* Ensures the text stays centered as it shrinks */
     
-    /* This is the magic part */
-    max-width: 90%;   /* Ensures it never touches the screen edges */
-    width: 400px;     /* Its normal size on a computer */
-    height: auto;     /* Keeps the logo from looking "squashed" */
-    font-size: 3.5rem;
+    /* Responsive Magic */
+    max-width: 95%;   
+    width: fit-content; /* Only takes up as much space as the letters need */
+    
+    /* Font Scaling */
+    font-size: clamp(2rem, 10vw, 3.5rem); /* Min 2rem, scales with screen, Max 3.5rem */
+    
     font-weight: 900;
-    letter-spacing: 8px;
+    letter-spacing: 4px; /* Reduced slightly for mobile so it doesn't overflow */
     background: linear-gradient(to bottom, #fff, var(--primary-gold));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: logoPulse 2s infinite ease-in-out;
+    white-space: nowrap; /* Prevents "GOMOKU" and "PRO" from splitting into two lines */
 }
-
 @keyframes logoPulse {
     0%, 100% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.05); opacity: 0.8; }
